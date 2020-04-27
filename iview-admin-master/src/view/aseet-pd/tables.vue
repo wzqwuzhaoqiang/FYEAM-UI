@@ -37,7 +37,7 @@ export default {
                     //vm.$emit('on-delete', params)
                     //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
                   }
-                
+
               }, [
                 h('Button', '查看盘点列表')
               ])
@@ -76,7 +76,7 @@ export default {
         }
       }
       this.$router.push(route)
-      
+
     },
     toCheckListPage (index) {
       const route = {
@@ -94,6 +94,7 @@ export default {
   mounted () {
     getPdBatTableData().then(res => {
       this.tableData = res.data
+      console.log(this.tableData);
     })
   }
 }

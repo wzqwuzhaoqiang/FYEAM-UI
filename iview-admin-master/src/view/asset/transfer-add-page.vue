@@ -5,7 +5,7 @@
          <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="120" >
       <FormItem label="转移日期"  prop="handoverTime" >
             <DatePicker placeholder="转移日期"  style="width: 200px"  v-model="formValidate.handoverTime" ></DatePicker>
- 
+
       </FormItem>
       <FormItem label="资产编号"  prop="AssetNumber">
             <Input  type="text"  v-model="formValidate.AssetNumber" name = "AssetNumber" style="width: 200px"></Input>
@@ -22,15 +22,15 @@
       <FormItem label="转移人工号"  prop="handoverPerson">
             <Input type="text"  v-model="formValidate.handoverPerson" name = "handoverPerson" style="width: 200px"></Input>
     </FormItem>
-     <FormItem label="转移公司"  prop="handoverCpt"> 
+     <FormItem label="转移公司"  prop="handoverCpt">
        <Select   style="width:200px" v-model="formValidate.handoverCpt"  placeholder="请选择转移公司">
           <Option v-for="item in orgList" :value="item.value">{{item.label}}</Option>
     </Select>
      </FormItem>
        <FormItem label="上传转移证据" >
-         <Upload   ref="upload"  action="http://10.112.5.135:9001/eam/uploadFile" :data="file" >   
+         <Upload   ref="upload"  action="http://10.112.5.135:9001/eam/uploadFile" :data="file" >
         <Button icon="ios-cloud-upload-outline">上传附件</Button>
-    </Upload> 
+    </Upload>
     </FormItem>
      <FormItem>
      <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
@@ -70,14 +70,14 @@ export default {
     formValidate: {
         // handoverTime: '',
         // AssetNumber: '',
-        // SerialNumber:'',  
+        // SerialNumber:'',
         // downloadFile:'',
         // jobNum:'',
         //   city: '',
       // handoverCpt: ['集团管理局', '福耀浮法集团','福耀国际集团','福清机械制造','福耀汽玻集团','福耀三峰股份有限公司']
 
       },
-                ruleValidate: { 
+                ruleValidate: {
                 handoverTime: [
                 { required: true, type: 'date', message: '请输入转移时间', trigger: 'change' }
                 ],
@@ -106,8 +106,8 @@ export default {
                 indeterminate: true,
                 checkAll: false,
             }
-           
-               
+
+
   },
   methods: {
     ...mapMutations([
@@ -134,8 +134,8 @@ export default {
                     }).catch(err => {
                       reject(err)
                        this.$Message.error(data)
-                    })   
-                    } 
+                    })
+                    }
                  else {
                    alert("Fail")
                         this.$Message.error('Fail!')
@@ -161,12 +161,12 @@ export default {
     handleBeforeUpload (file) {
         this.file = file
         this.$refs.upload.post(this.file)
-        
+
     },
     uploadSuccess(response, file, fileList) {
       alert("上传成功，提示："+response)
     },
-    
+
         close () {
             /**
              * 如果是调用closeTag方法，普通的页面传入的对象参数只需要写name字段即可
@@ -179,7 +179,24 @@ export default {
               }
             })
           }
-     }
+     },
+  mounted () {
+    //this.formValidate = this.$route.params.info
+    if(this.$route.params.info != null){
+      this.formValidate.handoverTime = new Date;
+      //资产编号
+      this.formValidate.AssetNumber = this.$route.params.info.assetNumber;
+      //序列号 SerialNumber
+      this.formValidate.SerialNumber = this.$route.params.info.serialNumber;
+      //接收人工号 jobNum
+      //接收人名称 userName
+      //转移人工号 handoverPerson
+      this.formValidate.handoverPerson = this.$route.params.info.jobnum;
+
+    }
+
+
+  }
 }
 </script>
  <style lang="less">

@@ -78,15 +78,15 @@ export default [
         },
         component: () => import('@/view/aseet-pd/tables.vue')
       },
-      {
-        path: 'asset_pd_exception',
-        name: 'asset_pd_exception',
-        meta: {
-          icon: 'md-list',
-          title: '盘点异常表'
-        },
-        component: () => import('@/view/error-page/404.vue')
-      },
+      // {
+      //   path: 'asset_pd_exception',
+      //   name: 'asset_pd_exception',
+      //   meta: {
+      //     icon: 'md-list',
+      //     title: '盘点异常表'
+      //   },
+      //   component: () => import('@/view/error-page/404.vue')
+      // },
       {
         path: 'asset_pd_list',
         name: 'asset_pd_list',

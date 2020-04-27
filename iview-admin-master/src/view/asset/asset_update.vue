@@ -21,7 +21,7 @@
       <FormItem label="资产编码"  prop="description">
             <Input type="text"  v-model="formValidate.assetNumber" name = "assetNumber" style="width: 200px"></Input>
     </FormItem>
-     <FormItem label="组织编码"  prop="organizationName"> 
+     <FormItem label="组织编码"  prop="organizationName">
        <Select   style="width:200px" v-model="formValidate.organizationName"  placeholder="请选择组织编码">
                          <Option v-for="item in orgList" :value="item.value">{{item.label}}</Option>
 
@@ -34,7 +34,7 @@
     </Select>
      </FormItem>
      </FormItem>
-     <FormItem label="机型"  prop="htcIncredible"> 
+     <FormItem label="机型"  prop="htcIncredible">
        <Select   style="width:200px" v-model="formValidate.htcIncredible"  placeholder="请选择机型">
                 <Option v-for="item in dataList" :value="item.value">{{item.label}}</Option>
 
@@ -80,8 +80,20 @@
     </FormItem>
       <FormItem label="启用时间"  prop="usingstarttime" >
             <DatePicker placeholder="启用时间"  style="width: 200px"  v-model="formValidate.usingstarttime" ></DatePicker>
- 
+
       </FormItem>
+        <FormItem label="修改时间"  prop="changeTime" >
+          <DatePicker placeholder="修改时间"  style="width: 200px"  v-model="formValidate.changeTime" ></DatePicker>
+
+        </FormItem>
+        <FormItem label="修改人"  prop="updateName" >
+          <Input type="text"  v-model="formValidate.updateName" name = "updateName" style="width: 200px"></Input>
+
+        </FormItem>
+        <FormItem label="备注"  prop="changeRemark" >
+          <Input type="text"  v-model="formValidate.changeRemark" name = "changeRemark" style="width: 200px"></Input>
+
+        </FormItem>
      <FormItem>
      <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
             <Button @click="handleReset('formValidate')" style="margin-left: 8px">取消</Button>
@@ -131,17 +143,20 @@ export default {
         value: '福耀三峰股份有限公司'
     }],
     formValidate: {
+      changeTime:'',
+      updateName:'',
+      changeRemark:'',
         // handoverTime: '',
         // AssetNumber: '',
-        // SerialNumber:'',  
+        // SerialNumber:'',
         // downloadFile:'',
         // jobNum:'',
         //   city: '',
       // handoverCpt: ['集团管理局', '福耀浮法集团','福耀国际集团','福清机械制造','福耀汽玻集团','福耀三峰股份有限公司']
 
       },
-                ruleValidate: { 
-              
+                ruleValidate: {
+
                 assetNumber: [
                 { required: true, type: 'string', message: '请输入资产编号', trigger: 'blur'}
                 ],
@@ -157,13 +172,13 @@ export default {
                 organizationName: [
                         { required: false, message: '请输入公司', trigger: 'change' }
                     ]
-                   
+
                 },
                 indeterminate: true,
                 checkAll: false,
             }
-           
-               
+
+
   },
   methods: {
     ...mapMutations([
@@ -196,7 +211,7 @@ export default {
                         // }
                          const data = this.formValidate
 
-                    
+
                         updateSubmit(data).then(res => {
                            const data = res.data
                       this.$Message.success(data)
@@ -206,8 +221,8 @@ export default {
                     }).catch(err => {
                       reject(err)
                        this.$Message.error( res.data)
-                    })   
-                    } 
+                    })
+                    }
                  else {
                    alert("Fail")
                         this.$Message.error('Fail!')
@@ -233,12 +248,12 @@ export default {
     handleBeforeUpload (file) {
         this.file = file
         this.$refs.upload.post(this.file)
-        
+
     },
     uploadSuccess(response, file, fileList) {
       alert("上传成功，提示："+response)
     },
-    
+
         close () {
             /**
              * 如果是调用closeTag方法，普通的页面传入的对象参数只需要写name字段即可
@@ -254,7 +269,7 @@ export default {
      },
     mounted () {
 this.formValidate = this.$route.params.info
- 
+
 
 }
 }

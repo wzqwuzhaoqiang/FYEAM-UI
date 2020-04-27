@@ -51,26 +51,32 @@ export default {
           title: '操作',
           key: 'handle',
           // key: 'action',
-width: 150,
-align: 'center',
-fixed: 'right',
-width: 130,
+          align: 'center',
+          fixed: 'right',
+          width: 200,
           button: [
-            (h, params, vm) => {
-              return h('button', {
-                on: {
-                   click: () =>
-                    this.toUpdatePage(params.row)
-                    //vm.$emit('on-delete', params)
-                    //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
-                  }
+     (h, params, vm) => {
+       return [h('button', {
+         on: {
+           click: () =>
+             this.toUpdatePage(params.row)
+           //vm.$emit('on-delete', params)
+           //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+         }
 
-              }, [
-                h('Button', '编辑')
-              ])
-            }
-          ]
-        }
+       }, [h('Button', '编辑')]),h('button', {
+         on: {
+           click: () =>
+             this.addTransfer(params.row)
+            // this.toUpdatePage(params.row)
+           //vm.$emit('on-delete', params)
+           //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+         }
+
+       }, [h('Button', '新增转移单')])]
+     }
+   ],
+        },
 
       ],
       tableData: []
@@ -89,6 +95,7 @@ width: 130,
       }
       this.$router.push(route)
     },
+
 
     exportExcel () {
      if (this.tableData.length) {
@@ -146,6 +153,19 @@ width: 130,
     },
     uploadSuccess(response, file, fileList) {
       alert("上传成功，提示："+response)
+    },
+    addTransfer (row) {
+      const route = {
+        name: 'add_asset_Transfer',
+        params: {
+          info: row
+        },
+        meta: {
+          title: `新增转移单-${row.serialNumber}`
+        }
+      }
+      this.$router.push(route)
+
     },
       toUpdatePage (row) {
       const route = {

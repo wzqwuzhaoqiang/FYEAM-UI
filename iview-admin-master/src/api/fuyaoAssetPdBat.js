@@ -31,7 +31,7 @@ export const getCheckBatTableData = data => {
 
 export const updateSubmit = data => {
   return axios.request({
-    url: 'http://10.112.5.135:9001/eam/updateAssetData',
+    url: 'http://127.0.0.1:9001/eam/updateAssetData',
     data: data,
     method: 'post'
   })

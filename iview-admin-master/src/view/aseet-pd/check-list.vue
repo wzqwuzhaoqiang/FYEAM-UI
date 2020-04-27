@@ -40,7 +40,7 @@ let renderText = params.row.status === 0? '未盘点' : params.row.status === 1?
 return (<span>{renderText}</span>)
 }} ,
 { title: '图片', width: 120, key: 'pdImgPath',render(h,params){
-var state = params.row.pdImgPath;      
+var state = params.row.pdImgPath;
 if ((state!= null)&& (state!='')) {
 return h('img',{
 props:{
@@ -55,42 +55,42 @@ style:{
 height:'120px'}})
 }}} ,
 {
-title: 'Action',
-key: 'action',
-width: 150,
-align: 'center',
-fixed: 'right',
-width: 130,
-render: (h, params) => {
-return h('div', [
-h('Button', {
-props: {
-type: 'primary',
-size: 'small'
-},
-style: {
-marginRight: '5px'
-},
-on: {
-click: () => {
-this.show(params.index)
-}
-}
-}, '查看'),
-h('Poptip', {
-props: {
-confirm: true,
-title: '修改成已盘点?'
-},
-on: {
-'on-ok': () => {
-this.updateStatu(params.index)
-}
-}
-}, '修改')
-]);
-}
-}
+      title: 'Action',
+      key: 'action',
+      width: 150,
+      align: 'center',
+      fixed: 'right',
+      width: 130,
+      render: (h, params) => {
+      return h('div', [
+      h('Button', {
+      props: {
+      type: 'primary',
+      size: 'small'
+      },
+      style: {
+      marginRight: '5px'
+      },
+      on: {
+      click: () => {
+      this.show(params.index)
+      }
+      }
+      }, '查看'),
+      h('Poptip', {
+      props: {
+      confirm: true,
+      title: '修改成已盘点?'
+      },
+      on: {
+      'on-ok': () => {
+      this.updateStatu(params.index)
+      }
+      }
+      }, '修改')
+      ]);
+      }
+      }
 ],
 tableData: []
 }

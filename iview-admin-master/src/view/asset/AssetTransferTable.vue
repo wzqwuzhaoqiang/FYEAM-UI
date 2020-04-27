@@ -3,7 +3,7 @@
     <Card>
       <tables ref="tables" editable searchable search-place="top" v-model="tableData" :columns="columns" @on-delete="handleDelete"/>
       <Button @click="addTransfer" style="margin: 10px 0;" type="primary"><Icon type="search"/>&nbsp;&nbsp;新增</Button>&nbsp
-     
+
     </Card>
   </div>
 </template>
@@ -29,31 +29,31 @@ export default {
         { title: '移交时间', key: 'handoverTime' },
 		{ title: '移交公司', key: 'handoverCpt' },
 		 { title: '是否经过财务变更', key: 'isFT' },
-   {
-                        title: '文件',
-                        key: 'downloadFile',
-                        width: 150,
-                        align: 'center',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('Button', {
-                                    props: {
-                                        type: 'primary',
-                                        size: 'small'
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.show(params.index)
-                                        }
-                                    }
-                                }, '下载')
-                               
-                            ]);
-                        }
-                    }
+   // {
+   //                      title: '文件',
+   //                      key: 'downloadFile',
+   //                      width: 150,
+   //                      align: 'center',
+   //                      render: (h, params) => {
+   //                          return h('div', [
+   //                              h('Button', {
+   //                                  props: {
+   //                                      type: 'primary',
+   //                                      size: 'small'
+   //                                  },
+   //                                  style: {
+   //                                      marginRight: '5px'
+   //                                  },
+   //                                  on: {
+   //                                      click: () => {
+   //                                          this.show(params.index)
+   //                                      }
+   //                                  }
+   //                              }, '下载')
+   //
+   //                          ]);
+   //                      }
+   //                  }
       ],
       tableData: []
     }
@@ -86,7 +86,7 @@ export default {
         }
       }
       this.$router.push(route)
-      
+
     }
   },
   mounted () {
