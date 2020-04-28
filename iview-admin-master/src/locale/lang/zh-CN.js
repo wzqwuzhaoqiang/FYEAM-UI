@@ -57,6 +57,7 @@ export default {
   work_order: '检修单',
   eqp_work_order: '工厂设备检修单',
   cmp_work_order: '计算机检修单',
+  repair_work_order:'资产维修履历',
   report: '报表',
   eqp_work_order_report: '工厂设备检修报表',
   cmp_work_order_report: '计算机资产检修报表',

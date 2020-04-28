@@ -230,6 +230,15 @@ export default [
           title: '计算机资产检修列表'
         },
         component: () => import('@/view/work-order/tables.vue')
+      },
+      {
+        path: 'repair_work_order',
+        name: 'repair_work_order',
+        meta: {
+          icon: 'md-list',
+          title: '资产维修履历'
+        },
+        component: () => import('@/view/asset/repairRecord.vue')
       }
     ]
   },

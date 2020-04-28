@@ -15,7 +15,7 @@
 <script>
 import Tables from '_c/tables'
 import excel from '@/libs/excel'
-import { getAssetTableData } from '@/api/fuyaoAssetPdBat'
+import { getRepairRecordList } from '@/api/fuyaoAssetPdBat'
 import { Z_FIXED } from 'zlib'
 export default {
   name: 'asset_pd_bat',
@@ -25,28 +25,28 @@ export default {
   data () {
     return {
       columns: [
-{ title: '组织编码',width:'130', fixed:"left", key: 'organizationName', sortable: true },
-{ title: '使用部门',width:"110", key: 'workCenterName', sortable: true },
-{ title: '财务编码',width:"100", key: 'financialCode', sortable: true },
-{ title: '使用人工号',width:"100", key: 'jobnum', sortable: true },
-{ title: '使用人名称',width:"100", key: 'username' },
-{ title: '计算机名',width:"100", key: 'description', sortable: true },
-{ title: '资产编码',width:"100", key: 'assetNumber', sortable: true },
+{ title: '表单ID',width:'130', key: 'odId', sortable: true },
+        { title: '公司',width:'130', key: 'company'},
+        { title: '单据编号',width:'130', key: 'documentNumber', sortable: true },
+        { title: '资产名称',width:'130', key: 'assetName'},
+        { title: '资产编号',width:'130', key: 'assetNumber', sortable: true },
+        { title: '联系电话',width:'130', key: 'connectPhone', sortable: true },
+        { title: '故障显现',width:'130',  key: 'faultPhenomenon'},
+        { title: '型号',width:'130',  key: 'modelNumber', sortable: true },
+        { title: '序列号',width:'130',  key: 'serialNumber', sortable: true },
+        { title: '配置',width:'130', key: 'configure'},
+        { title: '处理意见',width:'130', key: 'handleOpinions' },
+        { title: '维修验收',width:'130',  key: 'repairCheckAndAccept'},
+        { title: '状态',width:'130', key: 'status', sortable: true },
+        { title: '处理意见',width:'130', key: 'handleOpinions'},
+        { title: '创建日期',width:'130', key: 'createDate', sortable: true },
+        { title: '购买日期',width:'130', key: 'purchaseDate', sortable: true },
+
 { title: '机型',width:"100", key: 'htcIncredible' ,render(h,params){
               let renderText = params.row.htcIncredible ===4?'台式计算机':params.row.htcIncredible === 1?'笔记本':params.row.htcIncredible === 2?'移动工作站':params.row.htcIncredible === 3?'台式工作站':'其他'
              // jsx
             return (<span>{renderText}</span>)
 } },
-{ title: '型号',width:"100", key: 'assetmodel'},
-{ title: '序列号',width:"100", key: 'serialNumber', sortable: true },
-{ title: '基本配置',width:"130", key: 'allocation'},
-{ title: '显示器',width:"130", key: 'displayer'},
-{ title: 'MAC地址',width:"100", key: 'macaddress' },
-{ title: '鼠标',width:"130", key: 'mouse'},
-{ title: '无线MAC',width:"130", key: 'wifimac' },
-{ title: '键盘',width:"130", key: 'keyboard'},
-{ title: '电源适配器',width:"130", key: 'poweradapt' },
-{ title: '启用时间',width:"110", key: 'usingstarttime', sortable: true },
  {
           title: '操作',
           key: 'handle',
@@ -193,11 +193,8 @@ export default {
 
     },
   mounted () {
-    getAssetTableData().then(res => {
+    getRepairRecordList().then(res => {
       this.tableData = res.data
-      this.ajaxHistoryData= this.tableData
-
-
     })
   }
 }
