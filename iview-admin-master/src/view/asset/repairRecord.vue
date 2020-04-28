@@ -16,6 +16,8 @@
 import Tables from '_c/tables'
 import excel from '@/libs/excel'
 import { getRepairRecordList } from '@/api/fuyaoAssetPdBat'
+import { getOneByAssetNumber } from '@/api/fuyaoAssetPdBat'
+
 import { Z_FIXED } from 'zlib'
 export default {
   name: 'asset_pd_bat',
@@ -193,9 +195,20 @@ export default {
 
     },
   mounted () {
-    getRepairRecordList().then(res => {
-      this.tableData = res.data
-    })
+    if(this.$route.params.info != null){
+      const data ={
+        assetNumber:this.$route.params.info.assetNumber
+      }
+      getOneByAssetNumber(data).then(res => {
+        this.tableData = res.data
+      })
+    }
+    else{
+      getRepairRecordList().then(res => {
+        this.tableData = res.data
+      })
+    }
+
   }
 }
 </script>

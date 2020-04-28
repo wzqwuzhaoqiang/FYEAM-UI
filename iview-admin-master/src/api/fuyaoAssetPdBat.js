@@ -95,3 +95,13 @@ export const getRepairRecordList = () => {
 
 
 }
+
+export const getOneByAssetNumber = data => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/getOneByAssetNumber',
+    data: data,
+    method: 'post'
+  })
+
+
+}

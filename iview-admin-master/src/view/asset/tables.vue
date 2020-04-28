@@ -78,7 +78,7 @@ export default {
          h('button', {
          on: {
            click: () =>
-             this.addTransfer(params.row)
+             this.getOneByAssetNumber(params.row)
            // this.toUpdatePage(params.row)
            //vm.$emit('on-delete', params)
            //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
@@ -178,6 +178,19 @@ export default {
       this.$router.push(route)
 
     },
+    getOneByAssetNumber (row) {
+  const route = {
+    name: 'repair_work_order',
+    params: {
+      info: row
+    },
+    meta: {
+      title: `维修履历-${row.assetNumber}`
+    }
+  }
+  this.$router.push(route)
+
+},
       toUpdatePage (row) {
       const route = {
         name: 'asset_update',
