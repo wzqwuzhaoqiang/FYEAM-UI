@@ -47,6 +47,10 @@ export default {
 { title: '键盘',width:"130", key: 'keyboard'},
 { title: '电源适配器',width:"130", key: 'poweradapt' },
 { title: '启用时间',width:"110", key: 'usingstarttime', sortable: true },
+{ title: '修改时间',width:"110", key: 'changeTime', sortable: true },
+{ title: '修改人',width:"110", key: 'updateName' },
+{ title: '备注',width:"110", key: 'changeRemark'},
+{ title: '状态',width:"110", key: 'statusName', sortable: true },
  {
           title: '操作',
           key: 'handle',
@@ -90,7 +94,8 @@ export default {
         },
 
       ],
-      tableData: []
+      tableData: [],
+      statusList:["在用","借用","报废","待报废","闲置","设备"],
     }
   },
   methods: {
@@ -208,8 +213,13 @@ export default {
   mounted () {
     getAssetTableData().then(res => {
       this.tableData = res.data
-      this.ajaxHistoryData= this.tableData
-
+      //this.ajaxHistoryData= this.tableData
+      for(var i=0;i<this.tableData.length;i++){
+        if(this.tableData[i].status !=null){
+          this.tableData[i].statusName = this.statusList[this.tableData[i].status];
+          //this.tableData.statusName = this.statusList[res.data.status];
+        }
+      }
 
     })
   }

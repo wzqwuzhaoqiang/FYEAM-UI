@@ -15,6 +15,16 @@
      <FormItem label="使用人名称"  prop="username">
             <Input  type="text"  v-model="formValidate.username" name = "username" style="width: 200px"></Input>
     </FormItem>
+        <FormItem label="状态"  prop="status">
+          <Select   style="width:200px" v-model="formValidate.status"  placeholder="请选择状态">
+            <Option v-for="item in statusList" :value="item.value">{{item.label}}</Option>
+
+            <!-- <Option value="1">笔记本</Option>
+           <Option value="2" >台式</Option>
+           <Option value="3">移动工作站</Option>
+             <Option value="4" >其他</Option> -->
+          </Select>
+        </FormItem>
       <FormItem label="计算机名"  prop="description">
             <Input type="text"  v-model="formValidate.description" name = "description" style="width: 200px"></Input>
     </FormItem>
@@ -94,6 +104,7 @@
           <Input type="text"  v-model="formValidate.changeRemark" name = "changeRemark" style="width: 200px"></Input>
 
         </FormItem>
+
      <FormItem>
      <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
             <Button @click="handleReset('formValidate')" style="margin-left: 8px">取消</Button>
@@ -123,7 +134,8 @@ export default {
         label: '其他',
         value: 4
     }],
-     orgList: [{
+     statusList:[{label: '在用', value: 0},{label: '借用', value: 1},{label: '报废', value: 2},{label: '待报废', value: 3},{label: '闲置', value: 4},{label: '设备', value: 5}],
+        orgList: [{
         label: '集团管理局',
         value: '集团管理局'
     },{
@@ -146,6 +158,7 @@ export default {
       changeTime:'',
       updateName:'',
       changeRemark:'',
+      status:'',
         // handoverTime: '',
         // AssetNumber: '',
         // SerialNumber:'',
@@ -169,6 +182,7 @@ export default {
                  username: [
                 { required: true, type: 'string', message: '请输入名字', trigger: 'blur'}
                 ],
+                 // status:[{ required: true, message: '请选择状态', trigger: 'blur'}],
                 organizationName: [
                         { required: false, message: '请输入公司', trigger: 'change' }
                     ]
@@ -268,7 +282,14 @@ export default {
           }
      },
     mounted () {
-this.formValidate = this.$route.params.info
+      this.formValidate = this.$route.params.info
+    if(this.$route.params.info.changeTime != null){
+
+    }else{
+      this.formValidate.changeTime = new Date;
+    }
+
+
 
 
 }

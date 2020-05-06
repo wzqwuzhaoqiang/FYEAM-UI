@@ -5,24 +5,25 @@
         <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="120" >
       <FormItem label="开始盘点日期"  prop="pdStartDate" >
             <DatePicker placeholder="盘点开始日期"  style="width: 200px"  v-model="formValidate.pdStartDate" ></DatePicker>
- 
+
       </FormItem>
       <FormItem label="结束盘点日期"  prop="pdEndDate">
             <DatePicker type="date"  placeholder="盘点结束日期" v-model="formValidate.pdEndDate"  name = "pdEndDate" style="width: 200px"></DatePicker>
     </FormItem>
-     <FormItem label="盘点范围"  prop="orgList"> 
+     <FormItem label="盘点范围"  prop="orgList">
        <Checkbox
             :indeterminate="indeterminate"
             :value="checkAll"
             @click.prevent.native="handleCheckAll">全选</Checkbox>
 
-    <CheckboxGroup v-model="formValidate.orgList"  @on-change="checkAllGroupChange" >  
+    <CheckboxGroup v-model="formValidate.orgList"  @on-change="checkAllGroupChange" >
         <Checkbox label="集团管理局"></Checkbox>
         <Checkbox label="福耀浮法集团"></Checkbox>
         <Checkbox label="福耀国际集团"></Checkbox>
           <Checkbox label="福清机械制造"></Checkbox>
         <Checkbox label="福耀汽玻集团"></Checkbox>
          <Checkbox label="福耀三峰股份有限公司"></Checkbox>
+      <Checkbox label="福耀福清万达"></Checkbox>
     </CheckboxGroup>
      </FormItem>
      <FormItem>
@@ -47,7 +48,7 @@ export default {
                     pdStartDate: '',
                     orgList: [],
                 },
-                ruleValidate: { 
+                ruleValidate: {
                 orgList: [
                 { required: true, type: 'array', min: 1, message: '至少选择一个', trigger: 'change' },
                 ],
@@ -60,10 +61,10 @@ export default {
                 },
                 indeterminate: true,
                 checkAll: false,
-                orgList: ['集团管理局', '福耀浮法集团','福耀国际集团','福清机械制造','福耀汽玻集团','福耀三峰股份有限公司']
+                orgList: ['集团管理局', '福耀浮法集团','福耀国际集团','福清机械制造','福耀汽玻集团','福耀三峰股份有限公司','福耀福清万达']
             }
-           
-               
+
+
   },
   methods: {
     ...mapMutations([
@@ -78,7 +79,7 @@ export default {
                 this.indeterminate = false;
 
                 if (this.checkAll) {
-                    this.formValidate.orgList = ['集团管理局', '福耀浮法集团','福耀国际集团','福清机械制造','福耀汽玻集团','福耀三峰股份有限公司'];
+                    this.formValidate.orgList = ['集团管理局', '福耀浮法集团','福耀国际集团','福清机械制造','福耀汽玻集团','福耀三峰股份有限公司','福耀福清万达'];
                 } else {
                     this.formValidate.orgList = [];
                 }
@@ -94,7 +95,7 @@ export default {
                     this.indeterminate = false;
                     this.checkAll = false;
                 }
-            
+
         },
         submitForm(){
             //alert(this.formItem.pdStartDate)
@@ -102,7 +103,7 @@ export default {
               console.info(this.formItem);
               const formData = new FormData()
               checkBatchSubmit(data)
-            
+
         },
           handleSubmit (name) {
                 this.$refs[name].validate((valid) => {
@@ -121,7 +122,7 @@ export default {
                       reject(err)
                        this.$Message.success(data)
                     })
-                      
+
                     } else {
                         this.$Message.error('Fail!')
                     }
