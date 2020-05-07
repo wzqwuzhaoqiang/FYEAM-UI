@@ -5,7 +5,7 @@
       <Button style="margin: 10px 0;" type="primary" @click="createNew">创建新的资产</Button>
      &#12288; <Button style="margin: 10px 0;"  @click="exportExcel">导出为Excel文件</Button>
        &#12288;<Button style="margin: 10px 0;" @click="exportExcelTempelete">&nbsp;&nbsp;下载上传资产列表模板</Button>
-     <Upload ref="upload" action="http://10.112.5.135:9001/eam/importAssets" :on-success="uploadSuccess" :before-upload="handleBeforeUpload" :data="file" accept=".xls, .xlsx">
+     <Upload ref="upload" action="http://127.0.0.1:9001/eam/importAssets" :on-success="uploadSuccess" :before-upload="handleBeforeUpload" :data="file" accept=".xls, .xlsx">
      <Button style="margin: 10px 0;" @click="handleUploadFile">批量导入资产（Excel）</Button>
        </Upload>
     </Card>
