@@ -203,6 +203,7 @@ export default [
       },
     ]
   },
+
   {
     path: '/work-order',
     name: 'work_order',
@@ -240,6 +241,36 @@ export default [
         },
         component: () => import('@/view/asset/repairRecord.vue')
       }
+    ]
+  },
+  {
+    path: '/borrow',
+    name: 'borrow',
+    component: Main,
+    meta: {
+      icon: 'logo-buffer',
+      title: '借用单'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'borrow_list',
+        name: 'borrow_list',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '借用记录表单'
+        },
+        component: () => import('@/view/asset/borrowRecord.vue')
+      },
+      {
+        path: 'form_test',
+        name: 'form_test',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '测试表单'
+        },
+        component: () => import('@/view/error-page/404.vue')
+      },
     ]
   },
   {

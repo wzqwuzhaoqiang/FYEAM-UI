@@ -39,7 +39,7 @@ export const updateSubmit = data => {
 
 export const addSubmit = data => {
   return axios.request({
-    url: 'http://127.0.0.1:9001/eam/addAssetData',
+    url: 'http://10.112.5.135:9001/eam/addAssetData',
     data: data,
     method: 'post'
   })
@@ -90,6 +90,16 @@ export const updateStatus = data => {
 export const getRepairRecordList = () => {
   return axios.request({
     url: 'http://10.112.5.135:9001/eam/getRepairRecordList',
+    method: 'post'
+  })
+
+
+}
+
+
+export const getBorrowRecordList = () => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/getBorrowRecordList',
     method: 'post'
   })
 
