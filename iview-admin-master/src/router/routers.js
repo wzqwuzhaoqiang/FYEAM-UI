@@ -263,11 +263,41 @@ export default [
         component: () => import('@/view/asset/borrowRecord.vue')
       },
       {
-        path: 'form_test',
-        name: 'form_test',
+        path: 'borrow_form_test',
+        name: 'borrow_form_test',
         meta: {
           icon: 'md-arrow-dropdown-circle',
           title: '测试表单'
+        },
+        component: () => import('@/view/error-page/404.vue')
+      },
+    ]
+  },
+  {
+    path: '/scrap',
+    name: 'scrap',
+    component: Main,
+    meta: {
+      icon: 'logo-buffer',
+      title: '报废单'
+    },
+    component: Main,
+    children: [
+      {
+        path: 'scrap_list',
+        name: 'scrap_list',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '报废记录表单'
+        },
+        component: () => import('@/view/asset/scrapRecord.vue')
+      },
+      {
+        path: 'scrap_form_test',
+        name: 'scrap_form_test',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '报废测试表单'
         },
         component: () => import('@/view/error-page/404.vue')
       },

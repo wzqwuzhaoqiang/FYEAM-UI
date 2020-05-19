@@ -2,12 +2,6 @@
   <div>
     <Card>
       <tables  width="1000" length="500" sref="tables" editable searchable search-place="top" v-model="tableData" :columns="columns" @on-delete="handleDelete"/>
-      <Button style="margin: 10px 0;" type="primary" @click="createNew">创建新的资产</Button>
-     &#12288; <Button style="margin: 10px 0;"  @click="exportExcel">导出为Excel文件</Button>
-       &#12288;<Button style="margin: 10px 0;" @click="exportExcelTempelete">&nbsp;&nbsp;下载上传资产列表模板</Button>
-     <Upload ref="upload" action="http://10.112.5.135:9001/eam/importAssets" :on-success="uploadSuccess" :before-upload="handleBeforeUpload" :data="file" accept=".xls, .xlsx">
-     <Button style="margin: 10px 0;" @click="handleUploadFile">批量导入资产（Excel）</Button>
-       </Upload>
     </Card>
   </div>
 </template>
@@ -49,47 +43,47 @@ export default {
              // jsx
             return (<span>{renderText}</span>)
 } },
- {
-          title: '操作',
-          key: 'handle',
-          // key: 'action',
-          align: 'center',
-          fixed: 'right',
-          width: 300,
-          button: [
-     (h, params, vm) => {
-       return [h('button', {
-         on: {
-           click: () =>
-             this.toUpdatePage(params.row)
-           //vm.$emit('on-delete', params)
-           //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
-         }
-
-       }, [h('Button', '编辑')]),
-         h('button', {
-         on: {
-           click: () =>
-             this.addTransfer(params.row)
-            // this.toUpdatePage(params.row)
-           //vm.$emit('on-delete', params)
-           //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
-         }
-
-       }, [h('Button', '新增转移单')]),
-         h('button', {
-         on: {
-           click: () =>
-             this.addTransfer(params.row)
-           // this.toUpdatePage(params.row)
-           //vm.$emit('on-delete', params)
-           //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
-         }
-
-       }, [h('Button', '维修履历')])]
-     }
-   ],
-        },
+ // {
+ //          title: '操作',
+ //          key: 'handle',
+ //          // key: 'action',
+ //          align: 'center',
+ //          fixed: 'right',
+ //          width: 300,
+ //          button: [
+ //     (h, params, vm) => {
+ //       return [h('button', {
+ //         on: {
+ //           click: () =>
+ //             this.toUpdatePage(params.row)
+ //           //vm.$emit('on-delete', params)
+ //           //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+ //         }
+ //
+ //       }, [h('Button', '编辑')]),
+ //         h('button', {
+ //         on: {
+ //           click: () =>
+ //             this.addTransfer(params.row)
+ //            // this.toUpdatePage(params.row)
+ //           //vm.$emit('on-delete', params)
+ //           //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+ //         }
+ //
+ //       }, [h('Button', '新增转移单')]),
+ //         h('button', {
+ //         on: {
+ //           click: () =>
+ //             this.addTransfer(params.row)
+ //           // this.toUpdatePage(params.row)
+ //           //vm.$emit('on-delete', params)
+ //           //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+ //         }
+ //
+ //       }, [h('Button', '维修履历')])]
+ //     }
+ //   ],
+ //        },
 
       ],
       tableData: []
