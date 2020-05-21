@@ -201,6 +201,15 @@ export default [
         },
         component: () => import('@/view/asset/asset_add.vue')
       },
+      {
+        path: 'asset_LifeRecored',
+        name: 'asset_LifeRecored',
+        meta: {
+          icon: 'md-list',
+          title: '资产生命周期报表'
+        },
+        component: () => import('@/view/asset/lifeRecored.vue')
+      },
     ]
   },
 
@@ -330,7 +339,8 @@ export default [
           title: '计算机资产检修报表'
         },
         component: () => import('@/view/error-page/404.vue')
-      }
+      },
+
     ]
   },
   {

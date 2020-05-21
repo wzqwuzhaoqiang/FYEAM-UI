@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       columns: [
-{ title: '表单ID',width:'130', key: 'odId', sortable: true },
+{ title: '表单ID',width:'130', key: 'oaId', sortable: true },
         { title: '公司',width:'130', key: 'company'},
         { title: '单据编号',width:'130', key: 'documentNumber', sortable: true },
         { title: '资产名称',width:'130', key: 'assetName'},

@@ -88,7 +88,17 @@ export default {
            //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
          }
 
-       }, [h('Button', '维修履历')])]
+       }, [h('Button', '维修履历')]),
+         h('button', {
+           on: {
+             click: () =>
+               this.getLifeRecored(params.row)
+             // this.toUpdatePage(params.row)
+             //vm.$emit('on-delete', params)
+             //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+           }
+
+         }, [h('Button', '生命周期履历')])]
      }
    ],
         },
@@ -196,6 +206,19 @@ export default {
   this.$router.push(route)
 
 },
+    getLifeRecored (row) {
+  const route = {
+    name: 'asset_LifeRecored',
+    params: {
+      info: row
+    },
+    meta: {
+      title: `生命履历`
+    }
+  }
+  this.$router.push(route)
+
+},
       toUpdatePage (row) {
       const route = {
         name: 'asset_update',
@@ -214,12 +237,14 @@ export default {
     getAssetTableData().then(res => {
       this.tableData = res.data
       //this.ajaxHistoryData= this.tableData
+      //alert(this.tableData[1].assetStatus)
       for(var i=0;i<this.tableData.length;i++){
-        if(this.tableData[i].status !=null){
-          this.tableData[i].statusName = this.statusList[this.tableData[i].status];
+        if(this.tableData[i].assetStatus !=null){
+          this.tableData[i].statusName = this.statusList[this.tableData[i].assetStatus];
           //this.tableData.statusName = this.statusList[res.data.status];
         }
       }
+
 
     })
   }

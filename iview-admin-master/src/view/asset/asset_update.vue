@@ -15,8 +15,8 @@
      <FormItem label="使用人名称"  prop="username">
             <Input  type="text"  v-model="formValidate.username" name = "username" style="width: 200px"></Input>
     </FormItem>
-        <FormItem label="状态"  prop="status">
-          <Select   style="width:200px" v-model="formValidate.status"  placeholder="请选择状态">
+        <FormItem label="状态"  prop="assetStatus">
+          <Select   style="width:200px" v-model="formValidate.assetStatus"  placeholder="请选择状态">
             <Option v-for="item in statusList" :value="item.value">{{item.label}}</Option>
 
             <!-- <Option value="1">笔记本</Option>
@@ -158,7 +158,7 @@ export default {
       changeTime:'',
       updateName:'',
       changeRemark:'',
-      status:'',
+      assetStatus:'',
         // handoverTime: '',
         // AssetNumber: '',
         // SerialNumber:'',

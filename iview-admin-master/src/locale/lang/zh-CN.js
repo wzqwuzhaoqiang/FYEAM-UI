@@ -58,6 +58,7 @@ export default {
   eqp_work_order: '工厂设备检修单',
   cmp_work_order: '计算机检修单',
   repair_work_order:'资产维修履历',
+  asset_LifeRecored:'资产生命周期履历',
   borrow:'借用单',
   borrow_list:'借用记录表单',
   borrow_form_test:'借用测试表单',

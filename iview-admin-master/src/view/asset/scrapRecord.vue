@@ -21,7 +21,7 @@ export default {
   data () {
     return {
       columns: [
-{ title: 'OA表单ID',width:'130', key: 'odId', sortable: true },
+{ title: 'OA表单ID',width:'130', key: 'oaId', sortable: true },
         { title: '公司',width:'130', key: 'company'},
         { title: '使用部门',width:'130', key: 'usedepartment', sortable: true },
         { title: '创建日期',width:'130', key: 'createDate'},

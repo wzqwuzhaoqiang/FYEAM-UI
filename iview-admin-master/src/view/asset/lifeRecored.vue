@@ -9,37 +9,28 @@
 <script>
 import Tables from '_c/tables'
 import excel from '@/libs/excel'
-import { getRepairRecordList } from '@/api/fuyaoAssetPdBat'
-import { getOneByAssetNumber } from '@/api/fuyaoAssetPdBat'
-import { getBorrowRecordList } from '@/api/fuyaoAssetPdBat'
+import { getLifeRecoredByNum } from '@/api/fuyaoAssetPdBat'
 
 
 import { Z_FIXED } from 'zlib'
 export default {
-  name: 'borrowRecord',
+  name: 'scrapRecord',
   components: {
     Tables
   },
   data () {
     return {
       columns: [
-{ title: 'OA表单ID',width:'130', key: 'oaId', sortable: true },
-        { title: '公司',width:'130', key: 'company'},
-        { title: '日期，借用日期',width:'130', key: 'formDate', sortable: true },
+        { title: '动作',width:'130',  key: 'action', sortable: true },
+        { title: '对应单据编号',width:'130', key: 'formNumber', sortable: true },
+        { title: '资产编号',width:'130',  key: 'assetNumber', sortable: true },
+        { title: '资产名称',width:'130',  key: 'assetName', sortable: true },
+        { title: '启用日期',width:'130', key: 'startDate' },
+        { title: '使用人',width:'130', key: 'userName', sortable: true },
         { title: '借用人',width:'130', key: 'borrower'},
-        { title: '部门',width:'130', key: 'department', sortable: true },
-        { title: '联系方式',width:'130', key: 'contactInfor', sortable: true },
-        { title: '借用物品',width:'130',  key: 'borrowThing'},
-        { title: '数量',width:'130',  key: 'number', sortable: true },
-        { title: '用途',width:'130',  key: 'purpose', sortable: true },
-        { title: '资产编号',width:'130', key: 'assertNumber'},
-        { title: '资产名称',width:'130', key: 'assertName' },
-        { title: '规格/型号',width:'130',  key: 'model'},
-        { title: '序列号',width:'130', key: 'serialNumber', sortable: true },
-        { title: '配置信息',width:'130', key: 'configInfo'},
-        { title: '启用日期',width:'130', key: 'startDate', sortable: true },
+      { title: '联系方式',width:'130', key: 'contactInfor', sortable: true },
         { title: '借出时间',width:'130', key: 'borrowOutDate', sortable: true },
-        { title: '借用时间（单位天）',width:'130', key: 'borrowUseDate', sortable: true },
+        { title: '借用天数（单位天）',width:'130', key: 'borrowUseDate', sortable: true },
         { title: '出借人',width:'130', key: 'borrowOutman', sortable: true },
         { title: '是否归还（归还，续借）',width:'130', key: 'returnIs', sortable: true },
         { title: '归还人',width:'130', key: 'returntwoIs', sortable: true },
@@ -47,6 +38,13 @@ export default {
         { title: '物品归还完整状况',width:'130', key: 'thingSituation', sortable: true },
         { title: '接收人',width:'130', key: 'reciver', sortable: true },
         { title: '归还日期',width:'130', key: 'returnDate', sortable: true },
+        { title: '故障显现',width:'130',  key: 'faultPhenomenon'},
+        { title: '维修单据',width:'130',  key: 'documentNumber'},
+        { title: '维修验收',width:'130',  key: 'repairCheckAndAccept'},
+        { title: '处理意见',width:'130',  key: 'handleOpinions'},
+        { title: '报废原因',width:'130', key: 'reason', sortable: true },
+        { title: '非正常报废的纠正措施',width:'130', key: 'measures', sortable: true },
+
  // {
  //          title: '操作',
  //          key: 'handle',
@@ -193,11 +191,16 @@ export default {
 
     },
   mounted () {
+    if(this.$route.params.info != null){
+      const data ={
+        assetNumber:this.$route.params.info.assetNumber
+      }
+      getLifeRecoredByNum(data).then(res => {
+        this.tableData = res.data
+      })
+    }
 
-    getBorrowRecordList().then(res => {
-          this.tableData = res.data
-        })
-
+//alert("123")
     // if(this.$route.params.info != null){
     //   const data ={
     //     assetNumber:this.$route.params.info.assetNumber
