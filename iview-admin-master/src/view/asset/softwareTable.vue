@@ -4,6 +4,9 @@
       <tables ref="tables" editable searchable search-place="top" v-model="tableData" :columns="columns" @on-delete="handleDelete"/>
       </br>
       <Button style="margin: 10px 0;" type="primary" @click="exportExcel">导出为Excel文件</Button>
+      <Upload ref="upload" action="http://127.0.0.1:9001/eam/importSoftAssets" :on-success="uploadSuccess" :before-upload="handleBeforeUpload" :data="file" accept=".xls, .xlsx">
+        <Button style="margin: 10px 0;" @click="handleUploadFile">批量导入资产（Excel）</Button>
+      </Upload>
     </Card>
   </div>
 </template>
@@ -68,7 +71,35 @@ export default {
       } else {
         this.$Message.info('表格数据不能为空！')
       }
-    }
+    },
+
+    handleBeforeUpload (file) {
+      const fileExt = file.name.split('.').pop().toLocaleLowerCase()
+      if (fileExt === 'xlsx' || fileExt === 'xls') {
+
+        this.file = file
+        this.$refs.upload.post(this.file)
+
+      } else {
+        this.$Notice.warning({
+          title: '文件类型错误',
+          desc: '文件：' + file.name + '不是EXCEL文件，请选择后缀为.xlsx或者.xls的EXCEL文件。'
+        })
+      }
+      return false
+    },
+    uploadSuccess(response, file, fileList) {
+      alert("上传成功，提示："+response)
+    },
+    handleUploadFile () {
+      this.initUpload()
+    },
+    initUpload () {
+      this.file = null
+      this.showProgress = true
+      this.loadingProgress = 0
+    },
+
   },
   mounted () {
     getSoftAssetTableData().then(res => {

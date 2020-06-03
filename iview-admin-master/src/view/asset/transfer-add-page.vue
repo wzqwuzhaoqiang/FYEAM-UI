@@ -28,7 +28,7 @@
     </Select>
      </FormItem>
        <FormItem label="上传转移证据" >
-         <Upload   ref="upload"  action="http://10.112.5.135:9001/eam/uploadFile" :data="file" >
+         <Upload   ref="upload"  action="http://127.0.0.1:9001/eam/uploadFile" :data="file" >
         <Button icon="ios-cloud-upload-outline">上传附件</Button>
     </Upload>
     </FormItem>

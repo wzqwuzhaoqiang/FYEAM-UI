@@ -22,8 +22,8 @@ export default {
     return {
       columns: [
         { title: '批次编号', key: 'pdBatId', sortable: true },
-        { title: '盘点开始时间', key: 'pdStartDate' },
-        { title: '盘点结束时间', key: 'pdEndDate' },
+        { title: '盘点开始时间', key: 'pdStartDate',format:'yyyy-MM-dd' },
+        { title: '盘点结束时间', key: 'pdEndDate',format:'yyyy-MM-dd' },
         { title: '盘点范围', key: 'orgList' },
         {
           title: '操作',

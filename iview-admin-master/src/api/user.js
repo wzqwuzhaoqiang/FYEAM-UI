@@ -6,7 +6,7 @@ export const login = ({ userName, password }) => {
     password
   }
   return axios.request({
-    url: 'http://10.112.5.135:9001/eam/login',
+    url: 'http://127.0.0.1:9001/eam/login',
     data: data,
     method: 'post'
   })
@@ -14,7 +14,7 @@ export const login = ({ userName, password }) => {
 
 export const getUserInfo = (token) => {
   return axios.request({
-    url: 'http://10.112.5.135:9001/eam/getInfo',
+    url: 'http://127.0.0.1:9001/eam/getInfo',
     params: {
       token
     },
@@ -24,7 +24,7 @@ export const getUserInfo = (token) => {
 
 export const logout = (token) => {
   return axios.request({
-    url: 'http://10.112.5.135:9001/eam/logout',
+    url: 'http://127.0.0.1:9001/eam/logout',
     method: 'get'
   })
 }

@@ -2,7 +2,7 @@ import axios from '@/libs/api.request'
 
 export const getTableData = () => {
   return axios.request({
-    url: 'http://10.112.5.135:9001/eam/assetPdBatList',
+    url: 'http://127.0.0.1:9001/eam/assetPdBatList',
     method: 'post'
   })
 }
