@@ -134,4 +134,13 @@ export const getScrapRecordList = () => {
 
 }
 
+export const getBorrowForm = () => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/getBorrowForm',
+    method: 'post'
+  })
+
+
+}
+
 

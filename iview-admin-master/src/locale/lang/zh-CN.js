@@ -61,7 +61,7 @@ export default {
   asset_LifeRecored:'资产生命周期履历',
   borrow:'借用单',
   borrow_list:'借用记录表单',
-  borrow_form_test:'借用测试表单',
+  borrow_form:'前台借用表单',
   scrap:'报废单',
   scrap_list:'报废记录表单',
   scrap_form_test:'报废测试表单',

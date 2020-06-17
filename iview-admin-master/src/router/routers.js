@@ -272,13 +272,13 @@ export default [
         component: () => import('@/view/asset/borrowRecord.vue')
       },
       {
-        path: 'borrow_form_test',
-        name: 'borrow_form_test',
+        path: 'borrow_form',
+        name: 'borrow_form',
         meta: {
           icon: 'md-arrow-dropdown-circle',
-          title: '测试表单'
+          title: '前台借用表单'
         },
-        component: () => import('@/view/error-page/404.vue')
+        component: () => import('@/view/asset/borrowForm.vue')
       },
     ]
   },
