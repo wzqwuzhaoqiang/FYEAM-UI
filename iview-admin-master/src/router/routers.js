@@ -92,7 +92,7 @@ export default [
         name: 'asset_pd_list',
         meta: {
           icon: '_bear',
-          title: '盘点列表'
+          title: '历史盘点列表'
         },
         component: () => import('@/view/aseet-pd/check-list.vue')
       },

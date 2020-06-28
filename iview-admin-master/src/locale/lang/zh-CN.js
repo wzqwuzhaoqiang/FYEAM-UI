@@ -47,7 +47,7 @@ export default {
   asset_pd: '盘点',
   asset_pd_bat: '盘点批次列表',
   asset_pd_exception: '盘点异常表',
-  asset_pd_list: '盘点列表',
+  asset_pd_list: '历史盘点列表',
   asset: "资产",
   cmp_asset: '计算机硬件资产',
   eqp_asset: '工厂设备资产',

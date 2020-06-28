@@ -8,6 +8,9 @@
      <Upload ref="upload" action="http://127.0.0.1:9001/eam/importAssets" :on-success="uploadSuccess" :before-upload="handleBeforeUpload" :data="file" accept=".xls, .xlsx">
      <Button style="margin: 10px 0;" @click="handleUploadFile">批量导入资产（Excel）</Button>
        </Upload>
+      <Upload ref="qtzcupload" action="http://127.0.0.1:9001/eam/importAssetsqtzc" :on-success="uploadSuccess" :before-upload="handleBeforeUploadqtzc" :data="file" accept=".xls, .xlsx">
+        <Button style="margin: 10px 0;" @click="handleUploadFile">批量导入前台资产（Excel）</Button>
+      </Upload>
     </Card>
   </div>
 </template>
@@ -161,6 +164,21 @@ export default {
     handleRemove () {
       this.initUpload()
       this.$Message.info('上传的文件已删除！')
+    },
+    handleBeforeUploadqtzc (file) {
+      const fileExt = file.name.split('.').pop().toLocaleLowerCase()
+      if (fileExt === 'xlsx' || fileExt === 'xls') {
+
+        this.file = file
+        this.$refs.qtzcupload.post(this.file)
+
+      } else {
+        this.$Notice.warning({
+          title: '文件类型错误',
+          desc: '文件：' + file.name + '不是EXCEL文件，请选择后缀为.xlsx或者.xls的EXCEL文件。'
+        })
+      }
+      return false
     },
     handleBeforeUpload (file) {
       const fileExt = file.name.split('.').pop().toLocaleLowerCase()
