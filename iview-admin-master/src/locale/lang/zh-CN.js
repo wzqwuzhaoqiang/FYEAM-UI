@@ -75,5 +75,6 @@ export default {
   asset_update:'资产编辑',
   asset_add:"新增资产",
   logger:"日志",
+  transferError:"转移单失败记录",
 
 }

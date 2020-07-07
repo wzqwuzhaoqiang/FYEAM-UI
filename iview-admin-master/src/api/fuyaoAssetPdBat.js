@@ -143,4 +143,25 @@ export const getBorrowForm = () => {
 
 }
 
+export const getAssetErrorList = () => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/assetTransError',
+    method: 'post'
+  })
+
+
+}
+
+
+export const addExceptionBat = data => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/addExceptionBat',
+    data: data,
+    method: 'post'
+  })
+
+
+}
+
+
 

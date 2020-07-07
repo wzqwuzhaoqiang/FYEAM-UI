@@ -351,7 +351,20 @@ export default [
       icon: 'logo-buffer',
       title: '日志'
 
-    },},
+    },
+    component: Main,
+    children: [
+      {
+        path: '/transferError',
+        name: 'transferError',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '转移单失败记录'
+        },
+        component: () => import('@/view/asset/AssetError.vue')
+      },
+    ]
+  },
   {
     path: '/message',
     name: 'message',

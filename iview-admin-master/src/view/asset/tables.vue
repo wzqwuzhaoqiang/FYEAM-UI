@@ -28,6 +28,7 @@ export default {
   data () {
     return {
       columns: [
+        { title: '序列号',width:"100", key: 'serialNumber', sortable: true },
 { title: '组织编码',width:'130', fixed:"left", key: 'organizationName', sortable: true },
 { title: '使用部门',width:"110", key: 'workCenterName', sortable: true },
 { title: '财务编码',width:"100", key: 'financialCode', sortable: true },
@@ -41,7 +42,7 @@ export default {
             return (<span>{renderText}</span>)
 } },
 { title: '型号',width:"100", key: 'assetmodel'},
-{ title: '序列号',width:"100", key: 'serialNumber', sortable: true },
+
 { title: '基本配置',width:"130", key: 'allocation'},
 { title: '显示器',width:"130", key: 'displayer'},
 { title: 'MAC地址',width:"100", key: 'macaddress' },
@@ -257,8 +258,8 @@ export default {
       //this.ajaxHistoryData= this.tableData
       //alert(this.tableData[1].assetStatus)
       for(var i=0;i<this.tableData.length;i++){
-        if(this.tableData[i].assetStatus !=null){
-          this.tableData[i].statusName = this.statusList[this.tableData[i].assetStatus];
+        if(this.tableData[i].status !=null){
+          this.tableData[i].statusName = this.statusList[this.tableData[i].status];
           //this.tableData.statusName = this.statusList[res.data.status];
         }
       }

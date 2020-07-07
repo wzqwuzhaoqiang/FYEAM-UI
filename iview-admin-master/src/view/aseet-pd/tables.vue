@@ -13,6 +13,8 @@
 import Tables from '_c/tables'
 import excel from '@/libs/excel'
 import { getPdBatTableData } from '@/api/fuyaoAssetPdBat'
+import { addExceptionBat } from '@/api/fuyaoAssetPdBat'
+
 export default {
   name: 'asset_pd_bat',
   components: {
@@ -25,12 +27,16 @@ export default {
         { title: '盘点开始时间', key: 'pdStartDate',format:'yyyy-MM-dd' },
         { title: '盘点结束时间', key: 'pdEndDate',format:'yyyy-MM-dd' },
         { title: '盘点范围', key: 'orgList' },
+        { title: '原盘点批次编号', key: 'headId' },
         {
           title: '操作',
           key: 'handle',
+          align: 'center',
+          fixed: 'right',
+          width: 300,
           button: [
             (h, params, vm) => {
-              return h('button', {
+              return [h('button', {
                 on: {
                    click: () =>
                     this.toCheckListPage(params.row.pdBatId)
@@ -40,9 +46,68 @@ export default {
 
               }, [
                 h('Button', '查看盘点列表')
-              ])
-            }
-          ]
+              ]),
+                h('button', {
+                  on: {
+                    click: () =>
+                      this.toCheckException(params.row.pdBatId,params.row.pdEndDate,params.row.orgList)
+                    //vm.$emit('on-delete', params)
+                    //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+                  }
+
+                }, [h('Button', '新增异常盘点')]),
+              ]
+            },
+
+            /*(h, params, vm) => {
+              return [h('button', {
+                on: {
+                  click: () =>
+                    this.toUpdatePage(params.row)
+                  //vm.$emit('on-delete', params)
+                  //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+                }
+
+              }, [h('Button', '编辑')]),
+                h('button', {
+                  on: {
+                    click: () =>
+                      this.addTransfer(params.row)
+                    // this.toUpdatePage(params.row)
+                    //vm.$emit('on-delete', params)
+                    //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+                  }
+
+                }, [h('Button', '新增转移单')]),
+                h('button', {
+                  on: {
+                    click: () =>
+                      this.getOneByAssetNumber(params.row)
+                    // this.toUpdatePage(params.row)
+                    //vm.$emit('on-delete', params)
+                    //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+                  }
+
+                }, [h('Button', '维修履历')]),
+                h('button', {
+                  on: {
+                    click: () =>
+                      this.getLifeRecored(params.row)
+                    // this.toUpdatePage(params.row)
+                    //vm.$emit('on-delete', params)
+                    //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+                  }
+
+                }, [h('Button', '生命周期履历')])]
+            }*/
+
+            ]
+
+
+
+
+
+
         }
       ],
       tableData: []
@@ -89,7 +154,30 @@ export default {
         }
       }
       this.$router.push(route)
+      },
+    toCheckException (index,endDate,org) {
+
+      if(confirm("确定要生成新的批次吗！")){
+        const data ={
+          pdBatId: index,
+          pdEndDate:endDate,
+          orgList:org,
+        }
+        addExceptionBat(data).then(res => {
+          const data = res.data
+          this.$Message.success(data)
+          close();
+          resolve()
+        }).catch(err => {
+          reject(err)
+          this.$Message.success(data)
+        })
+      }else{
+
       }
+
+    },
+
   },
   mounted () {
     getPdBatTableData().then(res => {
