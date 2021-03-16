@@ -28,19 +28,23 @@ export default {
   data () {
     return {
       columns: [
+        { title: '计算机名',width:"100", key: 'description', sortable: true },
+        { title: '资产编码',width:"100", key: 'assetNumber', sortable: true },
         { title: '序列号',width:"100", key: 'serialNumber', sortable: true },
-{ title: '组织编码',width:'130', fixed:"left", key: 'organizationName', sortable: true },
+        { title: '使用人工号',width:"100", key: 'jobnum', sortable: true },
+{ title: '组织编码',width:'100', fixed:"left", key: 'organizationName', sortable: true },
 { title: '使用部门',width:"110", key: 'workCenterName', sortable: true },
 { title: '财务编码',width:"100", key: 'financialCode', sortable: true },
-{ title: '使用人工号',width:"100", key: 'jobnum', sortable: true },
+
 { title: '使用人名称',width:"100", key: 'username' },
-{ title: '计算机名',width:"100", key: 'description', sortable: true },
-{ title: '资产编码',width:"100", key: 'assetNumber', sortable: true },
-{ title: '机型',width:"100", key: 'htcIncredible' ,render(h,params){
-              let renderText = params.row.htcIncredible ===4?'台式计算机':params.row.htcIncredible === 1?'笔记本':params.row.htcIncredible === 2?'移动工作站':params.row.htcIncredible === 3?'台式工作站':'其他'
-             // jsx
-            return (<span>{renderText}</span>)
-} },
+
+{ title: '机型',width:"100", key: 'htcIncredibleName'},
+
+// { title: '机型',width:"100", key: 'htcIncredible' ,render(h,params){
+//               let renderText = params.row.htcIncredible ===4?'台式计算机':params.row.htcIncredible === 1?'笔记本':params.row.htcIncredible === 2?'移动工作站':params.row.htcIncredible === 3?'台式工作站':'其他'
+//              // jsx
+//             return (<span>{renderText}</span>)
+// } },
 { title: '型号',width:"100", key: 'assetmodel'},
 
 { title: '基本配置',width:"130", key: 'allocation'},
@@ -109,6 +113,7 @@ export default {
 
       ],
       tableData: [],
+      htcIncredibleList:['笔记本','笔记本','移动工作站','台式工作站','台式','组装机','黑白激光打印机','彩色激光打印机','针式打印机','多功能一体机','条码打印机','扫描仪','绘图仪','投影仪','复印机','服务器','存储','手持终端','无线终端','交换机','路由器','数码相机','喷墨打印机','会议电话','凭证装订机','无线AP','显示器','有线扫描枪','无线扫描枪','一体机'],
       statusList:["在用","借用","报废","待报废","闲置","设备"],
     }
   },
@@ -255,11 +260,16 @@ export default {
   mounted () {
     getAssetTableData().then(res => {
       this.tableData = res.data
+      console.log(this.tableData)
       //this.ajaxHistoryData= this.tableData
-      //alert(this.tableData[1].assetStatus)
+      //alert(this.tableData[1].organizationName)
+
+
       for(var i=0;i<this.tableData.length;i++){
+        this.tableData[i].htcIncredibleName = this.htcIncredibleList[this.tableData[i].htcIncredible]
         if(this.tableData[i].status !=null){
           this.tableData[i].statusName = this.statusList[this.tableData[i].status];
+
           //this.tableData.statusName = this.statusList[res.data.status];
         }
       }

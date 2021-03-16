@@ -54,6 +54,8 @@ src:params.row.pdImgPath
 style:{
 height:'120px'}})
 }}} ,
+
+
 {
       title: 'Action',
       key: 'action',
@@ -96,6 +98,8 @@ tableData: []
 }
 },
 methods: {
+
+
 handleDelete (params) {
 console.log(params)
 },
@@ -123,6 +127,7 @@ content: `userName：${this.tableData[index].userName}<br>jobNum：${this.tableD
 },
 updateStatu (index) {
 
+ // alert("kais")
 const data = {'pdCode':this.tableData[index].pdCode}
 updateStatus(data).then(res => {
      const data2 ={

@@ -12,19 +12,35 @@
     </FormItem>
      <FormItem label="盘点范围"  prop="orgList">
        <Checkbox
-            :indeterminate="indeterminate"
-            :value="checkAll"
-            @click.prevent.native="handleCheckAll">全选</Checkbox>
+         :key="1"
+       :indeterminate="indeterminate"
+       :value="checkAll"
+       @click.prevent.native="handleCheckAll">福清地区</Checkbox>
 
-    <CheckboxGroup v-model="formValidate.orgList"  @on-change="checkAllGroupChange" >
-        <Checkbox label="集团管理局"></Checkbox>
-        <Checkbox label="福耀浮法集团"></Checkbox>
-        <Checkbox label="福耀国际集团"></Checkbox>
-          <Checkbox label="福清机械制造"></Checkbox>
-        <Checkbox label="福耀汽玻集团"></Checkbox>
-         <Checkbox label="福耀三峰股份有限公司"></Checkbox>
-      <Checkbox label="福耀福清万达"></Checkbox>
-    </CheckboxGroup>
+       <CheckboxGroup v-model="formValidate.fqList"  @on-change="checkAllGroupChange" >
+         <Checkbox label="福耀玻璃工业集团股份有限公司（总办）FYG"></Checkbox>
+         <Checkbox label="福耀浮法FYF"></Checkbox>
+         <Checkbox label="福耀ARG"></Checkbox>
+         <Checkbox label="福耀集团(福建)机械制造有限公司"></Checkbox>
+         <Checkbox label="福耀汽玻FYA"></Checkbox>
+         <Checkbox label="福耀三锋"></Checkbox>
+         <Checkbox label="福清汽车玻璃"></Checkbox>
+         <Checkbox label="福清汽车饰件"></Checkbox>
+       </CheckboxGroup>
+
+       <Checkbox
+         :key="2"
+         :indeterminate="gzindeterminate"
+         :value="gzcheckAll"
+         @click.prevent.native="gzhandleCheckAll">广州地区</Checkbox>
+
+       <CheckboxGroup v-model="formValidate.gzList"  @on-change="gzcheckAllGroupChange" >
+
+         <Checkbox label="广州汽车玻璃"></Checkbox>
+       </CheckboxGroup>
+
+
+
      </FormItem>
      <FormItem>
       <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
@@ -47,6 +63,8 @@ export default {
                     pdEndDate: '',
                     pdStartDate: '',
                     orgList: [],
+                    fqList:[],
+                    gzList:[],
                 },
                 ruleValidate: {
                 orgList: [
@@ -61,7 +79,9 @@ export default {
                 },
                 indeterminate: true,
                 checkAll: false,
-                orgList: ['集团管理局', '福耀浮法集团','福耀国际集团','福清机械制造','福耀汽玻集团','福耀三峰股份有限公司','福耀福清万达']
+        gzindeterminate: true,
+        gzcheckAll: false,
+                orgList: ['福耀玻璃工业集团股份有限公司（总办）FYG', '福耀浮法FYF','福耀ARG','福耀集团(福建)机械制造有限公司','福耀汽玻FYA','福耀三锋','福清汽车玻璃','福清汽车饰件','广州汽车玻璃','福耀汽车铝件（福建）有限公司']
             }
 
 
@@ -79,11 +99,39 @@ export default {
                 this.indeterminate = false;
 
                 if (this.checkAll) {
-                    this.formValidate.orgList = ['集团管理局', '福耀浮法集团','福耀国际集团','福清机械制造','福耀汽玻集团','福耀三峰股份有限公司','福耀福清万达'];
+                    this.formValidate.fqList = ['福耀玻璃工业集团股份有限公司（总办）FYG', '福耀浮法FYF','福耀ARG','福耀集团(福建)机械制造有限公司','福耀汽玻FYA','福耀三锋','福清汽车玻璃','福清汽车饰件','广州汽车玻璃','福耀汽车铝件（福建）有限公司'];
                 } else {
-                    this.formValidate.orgList = [];
+                    this.formValidate.fqList = [];
                 }
             },
+    gzhandleCheckAll () {
+      if (this.gzindeterminate) {
+        this.gzcheckAll = false;
+      } else {
+        this.gzcheckAll = !this.gzcheckAll;
+      }
+      this.gzindeterminate = false;
+
+      if (this.gzcheckAll) {
+        this.formValidate.gzList = ['广州'];
+      } else {
+        this.formValidate.gzList = [];
+      }
+    },
+
+    gzcheckAllGroupChange (data) {
+      if (data.length === 3) {
+        this.gzindeterminate = false;
+        this.gzcheckAll = true;
+      } else if (data.length > 0) {
+        this.gzindeterminate = true;
+        this.gzcheckAll = false;
+      } else {
+        this.gzindeterminate = false;
+        this.gzcheckAll = false;
+      }
+
+    },
             checkAllGroupChange (data) {
                 if (data.length === 3) {
                     this.indeterminate = false;
@@ -97,15 +145,16 @@ export default {
                 }
 
         },
-        submitForm(){
-            //alert(this.formItem.pdStartDate)
-
-              console.info(this.formItem);
-              const formData = new FormData()
-              checkBatchSubmit(data)
-
-        },
+        // submitForm(){
+        //     //alert(this.formItem.pdStartDate)
+        //
+        //       console.info(this.formItem);
+        //       const formData = new FormData()
+        //       checkBatchSubmit(data)
+        //
+        // },
           handleSubmit (name) {
+            this.formValidate.orgList = this.formValidate.fqList.concat(this.formValidate.gzList);
                 this.$refs[name].validate((valid) => {
                     if (valid) {
                         const data ={

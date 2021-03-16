@@ -19,6 +19,9 @@
      <FormItem label="接收人名称"  prop="userName">
             <Input  type="text"  v-model="formValidate.userName" name = "userName" style="width: 200px"></Input>
     </FormItem>
+     <FormItem label="接收部门"  prop="department">
+      <Input  type="text"  v-model="formValidate.department" name = "department" style="width: 200px"></Input>
+      </FormItem>
       <FormItem label="转移人工号"  prop="handoverPerson">
             <Input type="text"  v-model="formValidate.handoverPerson" name = "handoverPerson" style="width: 200px"></Input>
     </FormItem>
@@ -94,7 +97,7 @@ export default {
                 { required: true, type: 'string', message: '请接收人名字', trigger: 'blur'}
                 ],
                 handoverCpt: [
-                        { required: false, message: '请选择转移公司', trigger: 'change' }
+                        { required: true, message: '请选择转移公司', trigger: 'change' }
                     ],
                      handoverPerson: [
                         { required: false, message: '请选择转移人员工号', trigger: 'change' }

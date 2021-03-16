@@ -54,6 +54,9 @@ export default {
   asset_list: '资产列表',
   equitment: '设备资产',
   cmp_soft_asset: '计算机软件资产',
+  soft_asset_edit: '软件编辑',
+  soft_asset_add: '新增软件',
+  assetpd_edit:'盘点结果编辑',
   work_order: '检修单',
   eqp_work_order: '工厂设备检修单',
   cmp_work_order: '计算机检修单',
@@ -76,5 +79,8 @@ export default {
   asset_add:"新增资产",
   logger:"日志",
   transferError:"转移单失败记录",
-
+  qx:"权限管理",
+  qx_cd:"菜单管理",
+  qx_user:"用户管理",
+  qx_role:"角色管理",
 }

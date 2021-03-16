@@ -21,7 +21,7 @@
       <FormItem label="资产编码"  prop="description">
             <Input type="text"  v-model="formValidate.assetNumber" name = "assetNumber" style="width: 200px"></Input>
     </FormItem>
-     <FormItem label="组织编码"  prop="organizationName"> 
+     <FormItem label="组织编码"  prop="organizationName">
        <Select   style="width:200px" v-model="formValidate.organizationName"  placeholder="请选择组织编码">
                          <Option v-for="item in orgList" :value="item.value">{{item.label}}</Option>
 
@@ -34,7 +34,7 @@
     </Select>
      </FormItem>
      </FormItem>
-     <FormItem label="机型"  prop="htcIncredible"> 
+     <FormItem label="机型"  prop="htcIncredible">
        <Select   style="width:200px" v-model="formValidate.htcIncredible"  placeholder="请选择机型">
                 <Option v-for="item in dataList" :value="item.value">{{item.label}}</Option>
 
@@ -83,7 +83,7 @@
     </FormItem>
       <FormItem label="启用时间"  prop="usingstarttime" >
             <DatePicker placeholder="启用时间"  style="width: 200px"  v-model="formValidate.usingstarttime" ></DatePicker>
- 
+
       </FormItem>
      <FormItem>
      <Button type="primary" @click="handleSubmit('formValidate')">提交</Button>
@@ -102,49 +102,140 @@ export default {
   data () {
       return {
         dataList: [{
-        label: '笔记本',
-        value: 1
-    },{
-        label: '台式',
-        value: 2
-    },{
-        label: '移动工作站',
-        value: 3
-    },{
-        label: '其他',
-        value: 4
-    }],
-     orgList: [{
-        label: '集团管理局',
-        value: '集团管理局'
-    },{
-        label: '福耀浮法集团',
-        value: '福耀浮法集团'
-    },{
-        label: '福耀国际集团',
-        value: '福耀国际集团'
-    },{
-        label: '福清机械制造',
-        value: '福清机械制造'
-    },{
-        label: '福耀汽玻集团',
-        value: '福耀汽玻集团'
-    },{
-        label: '福耀三峰股份有限公司',
-        value: '福耀三峰股份有限公司'
-    }],
+          label: '笔记本',
+          value: 0
+        },{
+          label: '笔记本',
+          value: 1
+        },{
+          label: '移动工作站',
+          value: 2
+        },{
+          label: '台式工作站',
+          value: 3
+        },{
+          label: '台式机',
+          value: 4
+        },{
+          label: '组装机',
+          value: 5
+        },{
+          label: '黑白激光打印机',
+          value: 6
+        },{
+          label: '彩色激光打印机',
+          value: 7
+        },{
+          label: '针式打印机',
+          value: 8
+        },{
+          label: '多功能一体机',
+          value: 9
+        },{
+          label: '条码打印机',
+          value: 10
+        },{
+          label: '扫描仪',
+          value: 11
+        },{
+          label: '绘图仪',
+          value: 12
+        },{
+          label: '投影仪',
+          value: 13
+        },{
+          label: '复印机',
+          value: 14
+        },{
+          label: '服务器',
+          value: 15
+        },{
+          label: '存储',
+          value: 16
+        },{
+          label: '手持终端',
+          value: 17
+        },{
+          label: '无线终端',
+          value: 18
+        },{
+          label: '交换机',
+          value: 19
+        },{
+          label: '路由器',
+          value: 20
+        },{
+          label: '数码相机',
+          value: 21
+        },{
+          label: '喷墨打印机',
+          value: 22
+        },{
+          label: '会议电话',
+          value: 23
+        },{
+          label: '凭证装订机',
+          value: 24
+        },{
+          label: '无线AP',
+          value: 25
+        },{
+          label: '显示器',
+          value: 26
+        },{
+          label: '有线扫描枪',
+          value: 27
+        },{
+          label: '无线扫描枪',
+          value: 28
+        },{
+          label: '一体机',
+          value: 29
+        }
+        ],
+        orgList: [{
+          label: '福耀玻璃工业集团股份有限公司（总办）FYG',
+          value: '福耀玻璃工业集团股份有限公司（总办）FYG'
+        },{
+          label: '福耀浮法FYF',
+          value: '福耀浮法FYF'
+        },{
+          label: '福耀ARG',
+          value: '福耀ARG'
+        },{
+          label: '福耀集团(福建)机械制造有限公司',
+          value: '福耀集团(福建)机械制造有限公司'
+        },{
+          label: '福耀汽玻FYA',
+          value: '福耀汽玻FYA'
+        },{
+          label: '福耀三锋',
+          value: '福耀三锋'
+        },{
+          label: '福清汽车玻璃',
+          value: '福清汽车玻璃'
+        },{
+          label: '福清汽车饰件',
+          value: '福清汽车饰件'
+        },{
+          label: '广州汽车玻璃',
+          value: '广州汽车玻璃'
+        },{
+          label: '福耀汽车铝件（福建）有限公司',
+          value: '福耀汽车铝件（福建）有限公司'
+        }],
     formValidate: {
         // handoverTime: '',
         // AssetNumber: '',
-        // SerialNumber:'',  
+        // SerialNumber:'',
         // downloadFile:'',
         // jobNum:'',
         //   city: '',
       // handoverCpt: ['集团管理局', '福耀浮法集团','福耀国际集团','福清机械制造','福耀汽玻集团','福耀三峰股份有限公司']
 
       },
-                ruleValidate: { 
-              
+                ruleValidate: {
+
                 assetNumber: [
                 { required: true, type: 'string', message: '请输入资产编号', trigger: 'blur'}
                 ],
@@ -160,13 +251,13 @@ export default {
                 organizationName: [
                         { required: true, message: '请输入公司', trigger: 'change' }
                     ]
-                   
+
                 },
                 indeterminate: true,
                 checkAll: false,
             }
-           
-               
+
+
   },
   methods: {
     ...mapMutations([
@@ -177,18 +268,18 @@ export default {
                     if (valid) {
                          const data = this.formValidate
 
-                    
+
                         addSubmit(data).then(res => {
                            const data = res.data
                       this.$Message.success(data)
-                      close();
+                          this.$router.back(-1)
 
                       resolve()
                     }).catch(err => {
                       reject(err)
                        this.$Message.error( res.data)
-                    })   
-                    } 
+                    })
+                    }
                  else {
                    alert("Fail")
                         this.$Message.error('Fail!')
@@ -197,7 +288,7 @@ export default {
                 // )
             },
             handleReset (name) {
-                close()
+              this.$router.back(-1)
             },
             initUpload () {
       this.file = null
@@ -214,12 +305,12 @@ export default {
     handleBeforeUpload (file) {
         this.file = file
         this.$refs.upload.post(this.file)
-        
+
     },
     uploadSuccess(response, file, fileList) {
       alert("上传成功，提示："+response)
     },
-    
+
         close () {
             /**
              * 如果是调用closeTag方法，普通的页面传入的对象参数只需要写name字段即可
@@ -234,7 +325,7 @@ export default {
           }
      },
     mounted () {
- 
+
 
 }
 }

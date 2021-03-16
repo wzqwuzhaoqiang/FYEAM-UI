@@ -1,5 +1,6 @@
 import axios from '@/libs/api.request'
 
+
 export const getPdBatTableData = () => {
   return axios.request({
     url: 'http://127.0.0.1:9001/eam/assetPdBatList',
@@ -37,11 +38,23 @@ export const updateSubmit = data => {
   })
 }
 
+
+export const softAssetUpdateSubmit = data => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/softAssetUpdateSubmit',
+    data: data,
+    method: 'post'
+  })
+}
+
 export const addSubmit = data => {
   return axios.request({
     url: 'http://127.0.0.1:9001/eam/addAssetData',
     data: data,
     method: 'post'
+
+
+
   })
 }
 
@@ -60,6 +73,28 @@ export const getSoftAssetTableData = () => {
 
 
 }
+
+
+export const softAssetAddSubmit = data => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/softAssetAddSubmit',
+    data: data,
+    method: 'post'
+  })
+
+
+}
+
+export const AssetPdUpdateSubmit = data => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/AssetPdUpdateSubmit',
+    data: data,
+    method: 'post'
+  })
+
+
+}
+
 
 export const checkBatchSubmit = data => {
   return axios.request({
@@ -137,7 +172,7 @@ export const getScrapRecordList = () => {
 export const getBorrowForm = () => {
   return axios.request({
     url: 'http://127.0.0.1:9001/eam/getBorrowForm',
-    method: 'post'
+    method: 'get'
   })
 
 
@@ -153,6 +188,15 @@ export const getAssetErrorList = () => {
 }
 
 
+export const getBujiu = () => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/bujiuControll',
+    method: 'post'
+  })
+
+
+}
+
 export const addExceptionBat = data => {
   return axios.request({
     url: 'http://127.0.0.1:9001/eam/addExceptionBat',
@@ -163,5 +207,46 @@ export const addExceptionBat = data => {
 
 }
 
+export const toSendMessageAgain = data => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/toSendMessageAgain',
+    data: data,
+    method: 'post'
+  })
 
 
+}
+export const toSendEmail = data => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/toSendEmail',
+    data: data,
+    method: 'post'
+  })
+
+
+}
+
+export const getLoginUserName = () => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/getLoginUserName',
+    method: 'post'
+  })
+
+
+}
+
+export const getBeShowData = () => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/getBeShowData',
+    method: 'post'
+  })
+
+
+}
+export const deleteSoftAsset = data => {
+  return axios.request({
+    url: 'http://127.0.0.1:9001/eam/deleteSoftAsset',
+    data: data,
+    method: 'post'
+  })
+}

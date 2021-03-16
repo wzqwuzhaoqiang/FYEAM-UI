@@ -87,15 +87,15 @@ export default [
       //   },
       //   component: () => import('@/view/error-page/404.vue')
       // },
-      {
-        path: 'asset_pd_list',
-        name: 'asset_pd_list',
-        meta: {
-          icon: '_bear',
-          title: '历史盘点列表'
-        },
-        component: () => import('@/view/aseet-pd/check-list.vue')
-      },
+      // {
+      //   path: 'asset_pd_list',
+      //   name: 'asset_pd_list',
+      //   meta: {
+      //     icon: '_bear',
+      //     title: '历史盘点列表'
+      //   },
+      //   component: () => import('@/view/aseet-pd/check-list.vue')
+      // },
       {
         path: 'asset_pd_bat_list',
         name: 'asset_pd_bat_list',
@@ -169,6 +169,17 @@ export default [
         component: () => import('@/view/asset/AssetTransferTable')
       },
       {
+        path: 'assetpd_edit',
+        name: 'assetpd_edit',
+        meta: {
+          icon: 'md-flower',
+          title: '盘点结果修改',
+          notCache: true,
+          hideInMenu: true,
+        },
+        component: () => import('@/view/aseet-pd/assetpd_edit.vue')
+      },
+      {
         path: 'add_asset_Transfer',
         name: 'add_asset_Transfer',
         meta: {
@@ -189,6 +200,30 @@ export default [
           hideInMenu: true,
         },
         component: () => import('@/view/asset/asset_update.vue')
+      },
+      {
+        path: 'soft_asset_edit',
+        name: 'soft_asset_edit',
+        meta: {
+          icon: '_bear',
+          title: '软件编辑',
+          notCache: true,
+          hideInMenu: true,
+
+        },
+        component: () => import('@/view/asset/assetSoft_update.vue')
+      },
+      {
+        path: 'soft_asset_add',
+        name: 'soft_asset_add',
+        meta: {
+          icon: '_bear',
+          title: '新增软件',
+          notCache: true,
+          hideInMenu: true,
+
+        },
+        component: () => import('@/view/asset/softasset_add.vue')
       },
       {
         path: 'asset_add',
@@ -365,6 +400,47 @@ export default [
       },
     ]
   },
+  {
+    path: '/qx',
+    name: 'qx',
+    component: Main,
+    meta: {
+      icon: 'logo-buffer',
+      title: '权限管理'
+
+    },
+    component: Main,
+    children: [
+      {
+        path: '/qx_cd',
+        name: 'qx_cd',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '菜单管理'
+        },
+        component: () => import('@/view/asset/AssetError.vue')
+      },
+      {
+        path: '/qx_user',
+        name: 'qx_user',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '用户管理'
+        },
+        component: () => import('@/view/asset/AssetError.vue')
+      },
+      {
+        path: '/qx_role',
+        name: 'qx_role',
+        meta: {
+          icon: 'md-arrow-dropdown-circle',
+          title: '角色管理'
+        },
+        component: () => import('@/view/asset/AssetError.vue')
+      },
+    ]
+  },
+
   {
     path: '/message',
     name: 'message',

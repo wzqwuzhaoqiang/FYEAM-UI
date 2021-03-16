@@ -11,7 +11,7 @@
 <script>
 import Tables from '_c/tables'
 import excel from '@/libs/excel'
-import { getCheckBatTableData,updateStatus } from '@/api/fuyaoAssetPdBat'
+import { getCheckBatTableData,updateStatus,getLoginUserName } from '@/api/fuyaoAssetPdBat'
 //import { updateStatus } from '@/api/fuyaoAssetPdBat'
 export default {
 name: 'asset_pd_list',
@@ -21,24 +21,27 @@ Tables
 data () {
 return {
 columns: [
+  { title: '计算机名',  width: 100,key: 'description' },
+  { title: '资产编号', width: 100, key: 'assetNumber'},
+  { title: '使用人工号',  width: 110,key: 'jobNum' },
 { title: '运营组织', key: 'organizationName',  width: 100,
 fixed: 'left',sortable: true },
 { title: '部门', key: 'department',   width: 100,sortable: true },
-{ title: '使用人工号',  width: 110,key: 'jobNum' },
 { title: '使用人名字', width: 110, key: 'userName'},
 { title: '结果', width: 100, key: 'status', sortable: true ,render(h,params){
-let renderText = params.row.status === 0? '未盘点' : params.row.status === 1?'盘点完成':'盘点异常'
+let renderText = params.row.status === 0? '未盘点' : params.row.status === 1?'盘点完成':params.row.status === 3?'出差无码':params.row.status === 4?'转移':params.row.status === 5?'盘亏':'盘点异常'
 // jsx
 return (<span>{renderText}</span>)
 }} ,
-{ title: '计算机名',  width: 100,key: 'description' },
-{ title: '资产编号', width: 100, key: 'assetNumber'},
+
 { title: '型号', width: 100, key: 'assetModel' },
 { title: '基本配置',  width: 100,key: 'allocation' },
 { title: '序列号',  width: 100,key: 'serialNumber', sortable: true },
 { title: '盘点时间',  width: 120,key: 'pdTime', sortable: true },
+  { title: '备注',  width: 120,key: 'remark', sortable: true },
+  { title: '修改人',  width: 120,key: 'updateMan', sortable: true },
 { title: '图片', width: 120, key: 'pdImgPath',render(h,params){
-var state = params.row.pdImgPath;      
+var state = params.row.pdImgPath;
 if ((state!= null)&& (state!='')) {
 let _img = params.row.pdImgPath; //因为现在后台返回来的只有一张图片，String类型。
         return h('Poptip', {
@@ -46,7 +49,7 @@ let _img = params.row.pdImgPath; //因为现在后台返回来的只有一张图
                   placement: 'right',
                   trigger: 'hover',
                 },
- 
+
               }, [
                 h('img', {
                   props: {},
@@ -77,39 +80,71 @@ let _img = params.row.pdImgPath; //因为现在后台返回来的只有一张图
                 ])
               ])
 
-                
+
 }}} ,
-{
-title: 'Action',
-key: 'action',
-width: 150,
-align: 'center',
-fixed: 'right',
-width: 130,
-render: (h, params) => {
-return h('div', [
-h('Button', {
-props: {
-type: 'primary',
-size: 'small'
-},
-style: {
-marginRight: '5px'
-},
-on: {
-click: () => {
-this.updateStatu(params.row.pdCode)
-}
-}
-}, '修改')
-]);
-}
-}
+  {
+    title: '操作',
+    key: 'handle',
+    // key: 'action',
+    align: 'center',
+    fixed: 'right',
+    width: 100,
+    button: [
+      (h, params, vm) => {
+        return [h('button', {
+          on: {
+            click: () =>
+              this.toUpdatePage(params.row)
+            //vm.$emit('on-delete', params)
+            //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+          }
+
+        }, [h('Button', '修改')])]
+      }
+    ],
+  },
+// {
+// title: 'Action',
+// key: 'action',
+// width: 150,
+// align: 'center',
+// fixed: 'right',
+// width: 130,
+// render: (h, params) => {
+// return h('div', [
+// h('Button', {
+// props: {
+// type: 'primary',
+// size: 'small'
+// },
+// style: {
+// marginRight: '5px'
+// },
+// on: {
+// click: () => {
+// this.updateStatu(params.row.pdCode)
+// }
+// }
+// }, '修改')
+// ]);
+// }
+// }
 ],
+  uname:'',
 tableData: []
 }
 },
 methods: {
+  toUpdatePage (row) {
+    console.log(row)
+    const route = {
+      name: 'assetpd_edit',
+      params: {
+        info: row
+      },
+    }
+    this.$router.push(route)
+  },
 handleDelete (params) {
 console.log(params)
 },
@@ -136,9 +171,17 @@ content: `userName：${this.tableData[index].userName}<br>jobNum：${this.tableD
 })
 },
 updateStatu (index) {
-   this.$Modal.confirm({
+
+  let uname;
+  getLoginUserName().then(res =>{
+    this.uname = res.data.uname;
+
+  })
+
+  alert(this.uname);
+  this.$Modal.confirm({
                     title: '确认框',
-                    content: '<p>是否修改成已盘点！</p>',
+                    content: '<p>是否确认要修改！</p>',
                     onOk: () => {
                        const data = {'pdCode':index}
                       updateStatus(data).then(res => {
@@ -154,7 +197,7 @@ updateStatu (index) {
                       }).catch(err => {
                       reject(err)
                        this.$Message.error( "修改失败！")
-                    }) 
+                    })
                       })
                     },
                     onCancel: () => {
@@ -188,12 +231,13 @@ confirm () {
             }
 },
 mounted () {
+
     const data ={
      pdBatId:this.$route.params.pdBatId
      }
 getCheckBatTableData(data).then(res => {
 this.tableData = res.data
- 
+
 })
 }
 }

@@ -5,6 +5,7 @@
       </br>
       <Button @click="addCheckBatch" style="margin: 10px 0;" type="primary"><Icon type="search"/>&nbsp;&nbsp;新增</Button>&nbsp
       <Button style="margin: 10px 0;" type="primary" @click="exportExcel">导出为Excel文件</Button>
+      <Button style="margin: 10px 0;" type="primary" @click="bujiu">盘点数据同步</Button>
     </Card>
   </div>
 </template>
@@ -14,6 +15,9 @@ import Tables from '_c/tables'
 import excel from '@/libs/excel'
 import { getPdBatTableData } from '@/api/fuyaoAssetPdBat'
 import { addExceptionBat } from '@/api/fuyaoAssetPdBat'
+import { getBujiu } from '@/api/fuyaoAssetPdBat'
+import { toSendMessageAgain } from '@/api/fuyaoAssetPdBat'
+import { toSendEmail } from '@/api/fuyaoAssetPdBat'
 
 export default {
   name: 'asset_pd_bat',
@@ -24,7 +28,7 @@ export default {
     return {
       columns: [
         { title: '批次编号', key: 'pdBatId', sortable: true },
-        { title: '盘点开始时间', key: 'pdStartDate',format:'yyyy-MM-dd' },
+        { title: '盘点开始时间', key: 'pdStartDate',format:'yyyy-MM-dd',sortable: true },
         { title: '盘点结束时间', key: 'pdEndDate',format:'yyyy-MM-dd' },
         { title: '盘点范围', key: 'orgList' },
         { title: '原盘点批次编号', key: 'headId' },
@@ -56,6 +60,24 @@ export default {
                   }
 
                 }, [h('Button', '新增异常盘点')]),
+                h('button', {
+                  on: {
+                    click: () =>
+                      this.sendMessageAgain(params.row.pdBatId)
+                    //vm.$emit('on-delete', params)
+                    //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+                  }
+
+                }, [h('Button', '提醒消息发送')]),
+                h('button', {
+                  on: {
+                    click: () =>
+                      this.sendEmail(params.row.pdBatId)
+                    //vm.$emit('on-delete', params)
+                    //vm.$emit('input', params.tableData.filter((item, index) => index !== params.row.initRowIndex))
+                  }
+
+                }, [h('Button', '邮件提醒')])
               ]
             },
 
@@ -117,6 +139,11 @@ export default {
     handleDelete (params) {
       console.log(params)
     },
+    bujiu (){
+      getBujiu().then(res => {
+        alert(res.data)
+      })
+    },
     exportExcel () {
      if (this.tableData.length) {
         this.exportLoading = true
@@ -155,6 +182,34 @@ export default {
       }
       this.$router.push(route)
       },
+    sendMessageAgain(index){
+      const data ={
+        pdBatId: index,
+      }
+      toSendMessageAgain(data).then(res => {
+        const data = res.data
+        this.$Message.success(data)
+        close();
+        resolve()
+      }).catch(err => {
+        reject(err)
+        this.$Message.success(data)
+      })
+    },
+    sendEmail(index){
+  const data ={
+    pdBatId: index,
+  }
+  toSendEmail(data).then(res => {
+    const data = res.data
+    this.$Message.success(data)
+    close();
+    resolve()
+  }).catch(err => {
+    reject(err)
+    this.$Message.success(data)
+  })
+},
     toCheckException (index,endDate,org) {
 
       if(confirm("确定要生成新的批次吗！")){
@@ -179,6 +234,7 @@ export default {
     },
 
   },
+
   mounted () {
     getPdBatTableData().then(res => {
       this.tableData = res.data

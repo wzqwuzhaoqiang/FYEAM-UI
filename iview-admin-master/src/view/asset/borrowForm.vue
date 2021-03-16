@@ -21,66 +21,51 @@ export default {
   data () {
     return {
       columns: [
-{ title: '表单记录ID',width:'130', key: 'tableID', sortable: true },
         { title: '借用人工号',width:'130', key: 'borrowerId'},
         { title: '借用人姓名',width:'130', key: 'borrowerName', sortable: true },
+        { title: '联系方式',width:'130', key: 'mobile', sortable: true },
         { title: '借用物品',width:'130', key: 'tools'},
         { title: '数量',width:'130', key: 'count', sortable: true },
         { title: '借用时间',width:'130', key: 'borrowTime', sortable: true },
         { title: '归还时间',width:'130',  key: 'returnTime'},
         { title: '状态',width:'130',  key: 'status', sortable: true },
-        { title: '图片', width: 120, key: 'photo',render(h,params){
-            var state = params.row.photo;
-            if ((state!= null)&& (state!='')) {
-              return h('img',{
-                props:{
-                  type: 'primary',
-                  size: 'small'},
-                attrs: {
-//src:require('../../../img/'+params.row.pdImgPath+'.jpg')
-                  src:params.row.photo
-                },
-
-                style:{
-                  height:'120px'}})
-            }}} ,
-        {
-          title: '操作',
-          key: 'action',
-          width: 150,
-          align: 'center',
-          fixed: 'right',
-          width: 130,
-          render: (h, params) => {
-            return h('div', [
-              h('Button', {
-                props: {
-                  type: 'primary',
-                  size: 'small'
-                },
-                style: {
-                  marginRight: '5px'
-                },
-                on: {
-                  click: () => {
-                    this.show(params.index)
-                  }
-                }
-              }, '借用确认'),
-              h('Button', {
-                props: {
-                  confirm: true,
-                  title: '修改成已盘点?'
-                },
-                on: {
-                  click: () => {
-                    this.updateStatu(params.index)
-                  }
-                }
-              }, '归还确认')
-            ]);
-          }
-        }
+        // {
+        //   title: '操作',
+        //   key: 'action',
+        //   width: 150,
+        //   align: 'center',
+        //   fixed: 'right',
+        //   width: 130,
+        //   render: (h, params) => {
+        //     return h('div', [
+        //       h('Button', {
+        //         props: {
+        //           type: 'primary',
+        //           size: 'small'
+        //         },
+        //         style: {
+        //           marginRight: '5px'
+        //         },
+        //         on: {
+        //           click: () => {
+        //             this.show(params.index)
+        //           }
+        //         }
+        //       }, '借用确认'),
+        //       h('Button', {
+        //         props: {
+        //           confirm: true,
+        //           title: '修改成已盘点?'
+        //         },
+        //         on: {
+        //           click: () => {
+        //             this.updateStatu(params.index)
+        //           }
+        //         }
+        //       }, '归还确认')
+        //     ]);
+        //   }
+        // }
         // { title: '用途',width:'130',  key: 'borrowConfirm', sortable: true },
         // { title: '资产编号',width:'130', key: 'backConfirm'},
  // {
@@ -232,6 +217,8 @@ export default {
 
     getBorrowForm().then(res => {
           this.tableData = res.data
+
+
         })
 
     // if(this.$route.params.info != null){

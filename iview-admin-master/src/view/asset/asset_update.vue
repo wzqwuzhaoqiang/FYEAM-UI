@@ -123,37 +123,128 @@ export default {
       return {
         dataList: [{
         label: '笔记本',
+        value: 0
+    },{
+        label: '笔记本',
         value: 1
     },{
-        label: '台式',
+        label: '移动工作站',
         value: 2
     },{
-        label: '移动工作站',
-        value: 3
-    },{
-        label: '其他',
-        value: 4
-    }],
+          label: '台式工作站',
+          value: 3
+        },{
+          label: '台式机',
+          value: 4
+        },{
+          label: '组装机',
+          value: 5
+        },{
+          label: '黑白激光打印机',
+          value: 6
+        },{
+          label: '彩色激光打印机',
+          value: 7
+        },{
+          label: '针式打印机',
+          value: 8
+        },{
+          label: '多功能一体机',
+          value: 9
+        },{
+          label: '条码打印机',
+          value: 10
+        },{
+          label: '扫描仪',
+          value: 11
+        },{
+          label: '绘图仪',
+          value: 12
+        },{
+          label: '投影仪',
+          value: 13
+        },{
+          label: '复印机',
+          value: 14
+        },{
+          label: '服务器',
+          value: 15
+        },{
+          label: '存储',
+          value: 16
+        },{
+          label: '手持终端',
+          value: 17
+        },{
+          label: '无线终端',
+          value: 18
+        },{
+          label: '交换机',
+          value: 19
+        },{
+          label: '路由器',
+          value: 20
+        },{
+          label: '数码相机',
+          value: 21
+        },{
+          label: '喷墨打印机',
+          value: 22
+        },{
+          label: '会议电话',
+          value: 23
+        },{
+          label: '凭证装订机',
+          value: 24
+        },{
+          label: '无线AP',
+          value: 25
+        },{
+          label: '显示器',
+          value: 26
+        },{
+          label: '有线扫描枪',
+          value: 27
+        },{
+          label: '无线扫描枪',
+          value: 28
+        },{
+          label: '一体机',
+          value: 29
+        }
+        ],
      statusList:[{label: '在用', value: 0},{label: '借用', value: 1},{label: '报废', value: 2},{label: '待报废', value: 3},{label: '闲置', value: 4},{label: '设备', value: 5}],
         orgList: [{
-        label: '集团管理局',
-        value: '集团管理局'
-    },{
-        label: '福耀浮法集团',
-        value: '福耀浮法集团'
-    },{
-        label: '福耀国际集团',
-        value: '福耀国际集团'
-    },{
-        label: '福清机械制造',
-        value: '福清机械制造'
-    },{
-        label: '福耀汽玻集团',
-        value: '福耀汽玻集团'
-    },{
-        label: '福耀三峰股份有限公司',
-        value: '福耀三峰股份有限公司'
-    }],
+          label: '福耀玻璃工业集团股份有限公司（总办）FYG',
+          value: '福耀玻璃工业集团股份有限公司（总办）FYG'
+        },{
+          label: '福耀浮法FYF',
+          value: '福耀浮法FYF'
+        },{
+          label: '福耀ARG',
+          value: '福耀ARG'
+        },{
+          label: '福耀集团(福建)机械制造有限公司',
+          value: '福耀集团(福建)机械制造有限公司'
+        },{
+          label: '福耀汽玻FYA',
+          value: '福耀汽玻FYA'
+        },{
+          label: '福耀三锋',
+          value: '福耀三锋'
+        },{
+          label: '福清汽车玻璃',
+          value: '福清汽车玻璃'
+        },{
+          label: '福清汽车饰件',
+          value: '福清汽车饰件'
+        },{
+          label: '广州汽车玻璃',
+          value: '广州汽车玻璃'
+        },{
+          label: '福耀汽车铝件（福建）有限公司',
+          value: '福耀汽车铝件（福建）有限公司'
+        }],
     formValidate: {
       changeTime:'',
       updateName:'',
@@ -165,6 +256,7 @@ export default {
         // downloadFile:'',
         // jobNum:'',
         //   city: '',
+      //{label: '集团管理局',label: '福耀浮法集团',label: '福耀汽玻集团',label: '福耀三峰股份有限公司',
       // handoverCpt: ['集团管理局', '福耀浮法集团','福耀国际集团','福清机械制造','福耀汽玻集团','福耀三峰股份有限公司']
 
       },
@@ -229,7 +321,7 @@ export default {
                         updateSubmit(data).then(res => {
                            const data = res.data
                       this.$Message.success(data)
-                      close();
+                          this.$router.back(-1)
 
                       resolve()
                     }).catch(err => {
@@ -245,7 +337,7 @@ export default {
                 // )
             },
             handleReset (name) {
-                close()
+              this.$router.back(-1)
             },
             initUpload () {
       this.file = null
